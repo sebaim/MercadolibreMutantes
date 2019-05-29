@@ -19,32 +19,33 @@ namespace ExamenMercadolibreMutantes.Services
             {
                 var row = MatrixUtils.GetRow(dna, iterationNumber);
                 sequencesCounter += FindSequences(row);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
                 var column = MatrixUtils.GetColumn(dna, iterationNumber);
                 sequencesCounter += FindSequences(column);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
                 var bottomToLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(bottomToLeftDiagonal);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
 
                 var topToRightDiagonal = MatrixUtils.GetTopRightDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(topToRightDiagonal);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
                 var leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(leftTopDiagonal);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
 
                 var rightBottomDiagonal = MatrixUtils.GetRightBottomDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(rightBottomDiagonal);
-                if (MoreThanOneSequencesFound(sequencesCounter)) return true;
+                if (MoreThanOneSequencesFound(sequencesCounter)) break;
             }
 
-            return false;
+            return MoreThanOneSequencesFound(sequencesCounter);
+           
 
         }
 
