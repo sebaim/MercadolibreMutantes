@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/ExamenMercadolibreMutantes
+/ExamenMercadolibreMutantes/bin/Debug/netcoreapp2.2
+/ExamenMercadolibreMutantes/obj
+/UnitTests/bin/Debug/netcoreapp2.2
+/UnitTests/obj/Debug/netcoreapp2.2
+/UnitTests/obj
+/ExamenMercadolibreMutantes/ExamenMercadolibreMutantes.csproj.user
