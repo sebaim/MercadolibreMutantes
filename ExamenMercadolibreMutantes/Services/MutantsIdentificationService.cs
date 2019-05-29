@@ -58,6 +58,8 @@ namespace ExamenMercadolibreMutantes.Services
 
         private int FindSequences(string row)
         {
+            if (row.Length < MUTANT_CONSECUTIVE_LETTERS) return 0;
+            
             int letterCounter = 1;
             int sequencesCounter = 0;
 

@@ -34,8 +34,9 @@ namespace ExamenMercadolibreMutantes
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
+                c.SwaggerDoc("v1", new Info { Title = "Mutants Identification API", Version = "v1", Description= "Challenge Tecnico Mercadolibre", Contact = new Contact() { Name = "Sebastian Ingni Magallan", Email = "sebastian_im@hotmail.com", Url = "https://github.com/sebaim/MercadolibreMutantes" } });
+
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +59,7 @@ namespace ExamenMercadolibreMutantes
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");                
             });
 
             app.UseHttpsRedirection();
