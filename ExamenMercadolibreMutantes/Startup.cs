@@ -76,8 +76,6 @@ namespace ExamenMercadolibreMutantes
 
             app.UseHttpsRedirection();
             app.UseMvc();
-
-            context.Database.EnsureCreated();
         }
     }
 }
