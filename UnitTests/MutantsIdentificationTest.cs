@@ -9,11 +9,11 @@ namespace UnitTests
 {
     class MutantsIdentificationTest
     {
-       private IAnalysisLogService analysisLogService;
-       private MutantsIdentificationService mutantsIdentificationService;
+        Mock<IAnalysisLogService> mock;
+        private MutantsIdentificationService mutantsIdentificationService;
         private DateTime actualDateTime;
 
-        Mock<IAnalysisLogService> mock;
+
         [SetUp]
         public void Setup()
         {
@@ -71,7 +71,7 @@ namespace UnitTests
 
             mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
 
-            var isMutant = mutantsIdentificationService.IsMutant(dna , actualDateTime);
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsTrue(isMutant);
             mock.Verify();
         }

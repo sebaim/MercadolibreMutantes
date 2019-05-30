@@ -1,4 +1,6 @@
-﻿using ExamenMercadolibreMutantes.Services;
+﻿using ExamenMercadolibreMutantes.Dto;
+using ExamenMercadolibreMutantes.Services;
+using ExamenMercadolibreMutantes.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -8,7 +10,7 @@ namespace ExamenMercadolibreMutantes.Controllers
     [ApiController]
     public class MutantsController : ControllerBase
     {
-
+        private char[] validCharacters = new char[] { 'A', 'T', 'C', 'G' };
         private MutantsIdentificationService mutantsIdentificationService;
         private IAnalysisLogService analysisLogService;
         public MutantsController(MutantsIdentificationService mutantsIdentificationService, IAnalysisLogService analysisLogService)
@@ -20,8 +22,12 @@ namespace ExamenMercadolibreMutantes.Controllers
         // POST api/values
         [HttpPost]
         [Route("/mutants")]
-        public ActionResult Mutants(string[] dna)
+        public ActionResult Mutants(RequestDto request)
         {
+            var dna = request.dna;
+
+            if (!MatrixUtils.IsSquareMatrix(dna) || MatrixUtils.ContainsInvalidCharacters (dna, validCharacters)) return BadRequest();
+
             if (mutantsIdentificationService.IsMutant(dna, DateTime.Now))
                 return new OkResult();
             else

@@ -9,7 +9,7 @@ namespace ExamenMercadolibreMutantes.Services
 {
     public class MutantsIdentificationService
     {
-        private const int MUTANT_CONSECUTIVE_LETTERS = 4;
+        private const int MUTANT_CONSECUTIVE_CHARACTERS = 4;
         private const int MUTANT_SEQUENCES_NUMBER = 2;
 
         private IAnalysisLogService analysisLogService;
@@ -54,16 +54,10 @@ namespace ExamenMercadolibreMutantes.Services
 
             var isMutant = MoreThanOneSequencesFound(sequencesCounter);
 
-
-
             analysisLogService.SaveOrUpdateLog(dna, isMutant, actualDate);
 
-
             return isMutant;
-           
-
         }
-
 
         private bool MoreThanOneSequencesFound(int sequencesFound)
         {
@@ -73,9 +67,9 @@ namespace ExamenMercadolibreMutantes.Services
 
         private int FindSequences(string row)
         {
-            if (row.Length < MUTANT_CONSECUTIVE_LETTERS) return 0;
+            if (row.Length < MUTANT_CONSECUTIVE_CHARACTERS) return 0;
             
-            int letterCounter = 1;
+            int characterCounter = 1;
             int sequencesCounter = 0;
 
             int i = 0;
@@ -84,17 +78,17 @@ namespace ExamenMercadolibreMutantes.Services
             {
                 if (row[i] == row[i + 1])
                 {
-                    letterCounter++;
+                    characterCounter++;
 
-                    if (letterCounter == MUTANT_CONSECUTIVE_LETTERS)
+                    if (characterCounter == MUTANT_CONSECUTIVE_CHARACTERS)
                     {
                         sequencesCounter++;
-                        letterCounter = 0;
+                        characterCounter = 0;
                     }
                 }
                 else
                 {
-                    letterCounter = 1;
+                    characterCounter = 1;
                 }
 
                 i++;

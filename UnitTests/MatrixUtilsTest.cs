@@ -8,7 +8,8 @@ namespace UnitTests
 {
     class MatrixUtilsTest
     {
-        string[] MutantExample = new string[] { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
+        string[] mutantExample = new string[] { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
+        char[] validCharacters = new char[] { 'A', 'T', 'C', 'G' };
 
         ///  "A T G C G A"
         ///  "C A G T G C"
@@ -24,12 +25,58 @@ namespace UnitTests
 
 
         [Test]
+        public void MatrixContainsValidCharacters()
+        {
+            var containsInvalidCharacters = MatrixUtils.ContainsInvalidCharacters(mutantExample, validCharacters);
+
+            Assert.IsFalse(containsInvalidCharacters);
+        }
+
+
+        [Test]
+        public void MatrixContainsInvalidCharacters()
+        {
+            string[] mutantExample = new string[] { "ATGCGA", "CAGTGC", "TTATZT", "AGAAGG", "CCCCTA", "TCACTZ" };
+
+            var containsInvalidCharacters = MatrixUtils.ContainsInvalidCharacters(mutantExample, validCharacters);
+
+            Assert.IsTrue(containsInvalidCharacters);
+        }
+
+        [Test]
+        public void IsSquareMatrix()
+        {
+            var isSquare = MatrixUtils.IsSquareMatrix(mutantExample);
+
+            Assert.IsTrue(isSquare);
+        }
+
+        [Test]
+        public void IsNotSquareMatrix()
+        {
+            string[] noSquareExample = new string[] { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA" };
+            var isSquare = MatrixUtils.IsSquareMatrix(noSquareExample);
+
+            Assert.IsFalse(isSquare);
+        }
+
+        [Test]
+        public void IsNotSquareMatrixBecauseOneRowWithLessColumns()
+        {
+            string[] noSquareExample = new string[] { "ATGCGA", "CAGTGC", "TTATG", "AGAAGG", "CCCCTA", "TCACTG" };
+            var isSquare = MatrixUtils.IsSquareMatrix(noSquareExample);
+
+            Assert.IsFalse(isSquare);
+        }
+
+
+        [Test]
         public void GetRowTest()
         {
-            var row = MatrixUtils.GetRow(MutantExample, 1);
+            var row = MatrixUtils.GetRow(mutantExample, 1);
             Assert.AreEqual("CAGTGC", row);
 
-            row = MatrixUtils.GetRow(MutantExample, 3);
+            row = MatrixUtils.GetRow(mutantExample, 3);
             Assert.AreEqual("AGAAGG", row);
         }
 
@@ -37,10 +84,10 @@ namespace UnitTests
         [Test]
         public void GetColumnTest()
         {
-            var columm = MatrixUtils.GetColumn(MutantExample, 1);
+            var columm = MatrixUtils.GetColumn(mutantExample, 1);
             Assert.AreEqual("TATGCC", columm);
 
-            columm = MatrixUtils.GetColumn(MutantExample, 5);
+            columm = MatrixUtils.GetColumn(mutantExample, 5);
             Assert.AreEqual("ACTGAG", columm);
         }
 
@@ -49,10 +96,10 @@ namespace UnitTests
         [Test]
         public void GetTopLeftDiagonal()
         {
-            var leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(MutantExample, 1);
+            var leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(mutantExample, 1);
             Assert.AreEqual("CT", leftTopDiagonal);
 
-            leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(MutantExample, 5);
+            leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(mutantExample, 5);
             Assert.AreEqual("TCATGA", leftTopDiagonal);
 
         }
@@ -61,10 +108,10 @@ namespace UnitTests
         [Test]
         public void GetTopRightDiagonal()
         {
-            var leftTopDiagonal = MatrixUtils.GetTopRightDiagonal(MutantExample, 1);
+            var leftTopDiagonal = MatrixUtils.GetTopRightDiagonal(mutantExample, 1);
             Assert.AreEqual("CG", leftTopDiagonal);
 
-            leftTopDiagonal = MatrixUtils.GetTopRightDiagonal(MutantExample, 5);
+            leftTopDiagonal = MatrixUtils.GetTopRightDiagonal(mutantExample, 5);
             Assert.AreEqual("GTAAAA", leftTopDiagonal);
 
         }
@@ -72,20 +119,20 @@ namespace UnitTests
         [Test]
         public void GetBottonLeftDiagonal()
         {
-            var bottomLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(MutantExample, 1);
+            var bottomLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(mutantExample, 1);
             Assert.AreEqual("TGCC", bottomLeftDiagonal);
 
-            bottomLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(MutantExample, 3);
+            bottomLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(mutantExample, 3);
             Assert.AreEqual("CC", bottomLeftDiagonal);
         }
 
         [Test]
         public void GetBottonRightDiagonal()
         {
-            var bottomRightDiagonal = MatrixUtils.GetRightBottomDiagonal(MutantExample, 1);
+            var bottomRightDiagonal = MatrixUtils.GetRightBottomDiagonal(mutantExample, 1);
             Assert.AreEqual("TGCA", bottomRightDiagonal);
 
-            bottomRightDiagonal = MatrixUtils.GetRightBottomDiagonal(MutantExample, 3);
+            bottomRightDiagonal = MatrixUtils.GetRightBottomDiagonal(mutantExample, 3);
             Assert.AreEqual("AT", bottomRightDiagonal);
         }
 

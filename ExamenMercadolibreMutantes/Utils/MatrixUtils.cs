@@ -7,6 +7,38 @@ namespace ExamenMercadolibreMutantes.Utils
 {
     public static class MatrixUtils
     {
+        public static bool IsSquareMatrix(string[] dna)
+        {
+            int columns = dna.Length;
+            bool isSquare = true;
+            int i = 0;
+
+            while (isSquare && i < dna.Length - 1)
+            {
+                isSquare = columns == dna[i].Length;
+                i++;
+            }
+
+            return isSquare;
+        }
+
+        public static bool ContainsInvalidCharacters(string[] dna, char[] validCharacters)
+        {
+            for (int i = 0; i < dna.Length; i++)
+            {
+                for (int j = 0; j < dna[i].Length; j++)
+                {
+                    if (!validCharacters.Contains(dna[i][j]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+
+        }
+
         public static string GetLeftBottomDiagonal(string[] dna, int columnNumber)
         {
             string bottomLeftDiagonañ = string.Empty;
