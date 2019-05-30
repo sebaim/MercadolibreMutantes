@@ -34,12 +34,12 @@ namespace ExamenMercadolibreMutantes
             services.AddDbContext<MutantsDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-
-                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                {
-                    services.BuildServiceProvider().GetService<MutantsDbContext>().Database.Migrate();
-                }
             });
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.BuildServiceProvider().GetService<MutantsDbContext>().Database.Migrate();
+            }
 
             services.AddScoped<MutantsIdentificationService>();
 
