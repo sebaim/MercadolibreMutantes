@@ -33,7 +33,7 @@ namespace ExamenMercadolibreMutantes
 
             services.AddDbContext<MutantsDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("AzureDbConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 {
@@ -76,6 +76,8 @@ namespace ExamenMercadolibreMutantes
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            context.Database.EnsureCreated();
         }
     }
 }
