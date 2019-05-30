@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ExamenMercadolibreMutantes.Dal;
 using ExamenMercadolibreMutantes.Models;
 using ExamenMercadolibreMutantes.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ExamenMercadolibreMutantes
@@ -42,6 +37,9 @@ namespace ExamenMercadolibreMutantes
             }
 
             services.AddScoped<MutantsIdentificationService>();
+            services.AddScoped<IAnalysisLogDal, AnalysisLogDal>();
+            services.AddScoped<IAnalysisLogService, AnalysisLogService>();            
+            
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

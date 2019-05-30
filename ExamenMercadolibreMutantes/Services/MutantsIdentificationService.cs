@@ -1,4 +1,5 @@
-﻿using ExamenMercadolibreMutantes.Utils;
+﻿using ExamenMercadolibreMutantes.Models;
+using ExamenMercadolibreMutantes.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,14 @@ namespace ExamenMercadolibreMutantes.Services
         private const int MUTANT_CONSECUTIVE_LETTERS = 4;
         private const int MUTANT_SEQUENCES_NUMBER = 2;
 
-        public bool IsMutant(string[] dna)
+        private IAnalysisLogService analysisLogService;
+
+        public MutantsIdentificationService(IAnalysisLogService analysisLogService)
+        {
+            this.analysisLogService = analysisLogService;
+        }
+
+        public bool IsMutant(string[] dna, DateTime actualDate)
         {
             int sequencesCounter = 0;
 
@@ -44,7 +52,14 @@ namespace ExamenMercadolibreMutantes.Services
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
             }
 
-            return MoreThanOneSequencesFound(sequencesCounter);
+            var isMutant = MoreThanOneSequencesFound(sequencesCounter);
+
+
+
+            analysisLogService.SaveOrUpdateLog(dna, isMutant, actualDate);
+
+
+            return isMutant;
            
 
         }

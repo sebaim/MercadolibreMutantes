@@ -1,4 +1,5 @@
 ﻿using ExamenMercadolibreMutantes.Services;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,17 @@ namespace UnitTests
 {
     class MutantsIdentificationTest
     {
-        MutantsIdentificationService _mutantsIdentificationService = new MutantsIdentificationService();
+       private IAnalysisLogService analysisLogService;
+       private MutantsIdentificationService mutantsIdentificationService;
+        private DateTime actualDateTime;
 
+        Mock<IAnalysisLogService> mock;
         [SetUp]
         public void Setup()
         {
+            mock = new Mock<IAnalysisLogService>();
+            mutantsIdentificationService = new MutantsIdentificationService(mock.Object);
+            actualDateTime = DateTime.Now;
         }
 
         /// A T G C A G
@@ -24,8 +31,13 @@ namespace UnitTests
         [Test]
         public void IsNotMutantWithNoSequence()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCAG", "CTACCG", "TACATC", "AGAATC", "CTCATC" , "ACGTCA" });
+            string[] dna = { "ATGCAG", "CTACCG", "TACATC", "AGAATC", "CTCATC", "ACGTCA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, false, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsFalse(isMutant);
+            mock.Verify();
         }
 
         /// A T G C A G
@@ -37,10 +49,14 @@ namespace UnitTests
         [Test]
         public void IsNotMutantWithOnlyOneSequence()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCAG", "CTAACG", "TACATC", "AGAATC", "CTCATC", "ACGTCA" });
-            Assert.IsFalse(isMutant);
-        }
+            string[] dna = { "ATGCAG", "CTAACG", "TACATC", "AGAATC", "CTCATC", "ACGTCA" };
 
+            mock.Setup(m => m.SaveOrUpdateLog(dna, false, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
+            Assert.IsFalse(isMutant);
+            mock.Verify();
+        }
 
         /// A T G C A C
         /// C T A A T C
@@ -51,10 +67,14 @@ namespace UnitTests
         [Test]
         public void IsMutantWith2VerticalSequences()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCAC", "CTAATC", "TACATC", "AGAATC", "CTCATC", "ACGTCA" });
-            Assert.IsTrue(isMutant);
-        }
+            string[] dna = { "ATGCAC", "CTAATC", "TACATC", "AGAATC", "CTCATC", "ACGTCA" };
 
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna , actualDateTime);
+            Assert.IsTrue(isMutant);
+            mock.Verify();
+        }
 
         /// A T G C G A
         /// A T A A A T
@@ -65,8 +85,13 @@ namespace UnitTests
         [Test]
         public void IsMutantWith2DiagonalSequences()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCGA", "ATAAAT", "TACAGT", "AGAATG", "CTCATA", "ACGTCA" });
+            string[] dna = { "ATGCGA", "ATAAAT", "TACAGT", "AGAATG", "CTCATA", "ACGTCA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsTrue(isMutant);
+            mock.Verify();
         }
 
         /// A T G C G A
@@ -78,8 +103,13 @@ namespace UnitTests
         [Test]
         public void IsMutantWith1HorizontalAnd1VerticalSequences()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCGA", "CTAAAA", "TTCTGT", "ATAATG", "CCCATA", "ACGTAA" });
+            string[] dna = { "ATGCGA", "CTAAAA", "TTCTGT", "ATAATG", "CCCATA", "ACGTAA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsTrue(isMutant);
+            mock.Verify();
         }
 
         /// A T G C G A
@@ -91,8 +121,13 @@ namespace UnitTests
         [Test]
         public void IsMutantWith2HorizontalSequences()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCGA", "CTAAAA", "TTCTGT", "AGAATG", "CCCCTA", "ACGTAA" });
+            string[] dna = { "ATGCGA", "CTAAAA", "TTCTGT", "AGAATG", "CCCCTA", "ACGTAA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsTrue(isMutant);
+            mock.Verify();
         }
 
         /// A T G C G A
@@ -104,8 +139,13 @@ namespace UnitTests
         [Test]
         public void IsMutantWith3Sequences()
         {
-            var isMutant = _mutantsIdentificationService.IsMutant(new string[] { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" });
+            string[] dna = { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
             Assert.IsTrue(isMutant);
+            mock.Verify();
         }
     }
 }

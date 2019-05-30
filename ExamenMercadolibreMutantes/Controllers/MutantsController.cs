@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ExamenMercadolibreMutantes.Services;
-using Microsoft.AspNetCore.Http;
+﻿using ExamenMercadolibreMutantes.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ExamenMercadolibreMutantes.Controllers
 {
@@ -13,10 +9,12 @@ namespace ExamenMercadolibreMutantes.Controllers
     public class MutantsController : ControllerBase
     {
 
-        MutantsIdentificationService _mutantsIdentificationService;
-        public MutantsController(MutantsIdentificationService mutantsIdentificationService)
+        private MutantsIdentificationService mutantsIdentificationService;
+        private IAnalysisLogService analysisLogService;
+        public MutantsController(MutantsIdentificationService mutantsIdentificationService, IAnalysisLogService analysisLogService)
         {
-            _mutantsIdentificationService = mutantsIdentificationService;
+            this.mutantsIdentificationService = mutantsIdentificationService;
+            this.analysisLogService = analysisLogService;
         }
 
         // POST api/values
@@ -24,7 +22,7 @@ namespace ExamenMercadolibreMutantes.Controllers
         [Route("/mutants")]
         public ActionResult Mutants(string[] dna)
         {
-            if (_mutantsIdentificationService.IsMutant(dna))
+            if (mutantsIdentificationService.IsMutant(dna, DateTime.Now))
                 return new OkResult();
             else
                 return new StatusCodeResult(403);
@@ -32,12 +30,10 @@ namespace ExamenMercadolibreMutantes.Controllers
 
         [HttpGet]
         [Route("/stats")]
-        public ActionResult Stats(string[] dna)
+        public ActionResult Stats()
         {
-            if (_mutantsIdentificationService.IsMutant(dna))
-                return new OkResult();
-            else
-                return new ForbidResult();
+
+            return new JsonResult(analysisLogService.GetStatistics());
         }
 
     }
