@@ -9,3 +9,5 @@
 /UnitTests/obj/Debug/netcoreapp2.2
 /UnitTests/obj
 /ExamenMercadolibreMutantes/ExamenMercadolibreMutantes.csproj.user
+/StressTestConsole/obj
+/StressTestConsole/bin/Debug/netcoreapp2.2
