@@ -94,6 +94,60 @@ namespace UnitTests
             mock.Verify();
         }
 
+        /// T T G C G A
+        /// T T A A A T
+        /// T A C A G T
+        /// T T A A T G
+        /// C T T T T A
+        /// A C A T C A
+        [Test]
+        public void IsMutantWithLeftBottomDiagonal()
+        {
+            string[] dna = { "TTGCGG", "TTAAAT", "TACAGT", "TTAATG", "CTTTTA", "ACATCA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
+            Assert.IsTrue(isMutant);
+            mock.Verify();
+        }
+
+        /// T T G C G A
+        /// T T A A A T
+        /// A A C A G T
+        /// T T A A T G
+        /// C T T T C A
+        /// A A A A C A
+        [Test]
+        public void IsMutantWithTopRightDiagonal()
+        {
+            string[] dna = { "TTGCGA", "TTAAAT", "AACAGT", "TTAATG", "CTTTCA", "AAAACA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
+            Assert.IsTrue(isMutant);
+            mock.Verify();
+        }
+
+        /// T T G C G A
+        /// T T A A A T
+        /// T A C A G T
+        /// T G A A T G
+        /// C T C T T A
+        /// A C T T C A
+        [Test]
+        public void IsMutantWithRightBottomDiagonal()
+        {
+            string[] dna = { "TTGCGG", "TTAAAT", "TACAGT", "TGAATG", "CTCTTA", "ACTTCA" };
+
+            mock.Setup(m => m.SaveOrUpdateLog(dna, true, actualDateTime)).Verifiable();
+
+            var isMutant = mutantsIdentificationService.IsMutant(dna, actualDateTime);
+            Assert.IsTrue(isMutant);
+            mock.Verify();
+        }
+
         /// A T G C G A
         /// C T A A A A
         /// T T C T G T

@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExamenMercadolibreMutantes.Dto
 {
@@ -14,12 +11,13 @@ namespace ExamenMercadolibreMutantes.Dto
         [JsonProperty("count_human_dna")]
         public int HumanDnaCount { get; set; }
 
-        [JsonProperty("ratio")]
+        [JsonProperty("ratio")]        
         public decimal Ratio
         {
             get
-            {
-                return HumanDnaCount == 0 ? 0 : (decimal)MutantDnaCount / HumanDnaCount;
+            {              
+                var value = HumanDnaCount == 0 ? 0 : (decimal)MutantDnaCount / HumanDnaCount;
+                return Math.Round(value, 2);
             }
         }
     }

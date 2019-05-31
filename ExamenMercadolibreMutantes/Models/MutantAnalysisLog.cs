@@ -23,10 +23,5 @@ namespace ExamenMercadolibreMutantes.Models
                    IsMutant == log.IsMutant &&
                    Count == log.Count;
         }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Id, Dna, IsMutant, Count);
-        }
     }
 }

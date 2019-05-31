@@ -37,7 +37,6 @@ namespace ExamenMercadolibreMutantes.Services
                 sequencesCounter += FindSequences(bottomToLeftDiagonal);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
-
                 var topToRightDiagonal = MatrixUtils.GetTopRightDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(topToRightDiagonal);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
@@ -45,7 +44,6 @@ namespace ExamenMercadolibreMutantes.Services
                 var leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(leftTopDiagonal);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
-
 
                 var rightBottomDiagonal = MatrixUtils.GetRightBottomDiagonal(dna, iterationNumber);
                 sequencesCounter += FindSequences(rightBottomDiagonal);

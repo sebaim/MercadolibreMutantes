@@ -21,8 +21,8 @@ namespace ExamenMercadolibreMutantes.Controllers
 
         // POST api/values
         [HttpPost]
-        [Route("/mutants")]
-        public ActionResult Mutants(RequestDto request)
+        [Route("/mutant")]
+        public ActionResult Mutant(RequestDto request)
         {
             var dna = request.dna;
 
