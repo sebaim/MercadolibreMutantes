@@ -33,12 +33,12 @@ namespace ExamenMercadolibreMutantes.Services
                 sequencesCounter += FindSequences(column);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
-                var bottomToLeftDiagonal = MatrixUtils.GetLeftBottomDiagonal(dna, iterationNumber);
-                sequencesCounter += FindSequences(bottomToLeftDiagonal);
+                var leftBottomDiagonal = MatrixUtils.GetLeftBottomDiagonal(dna, iterationNumber);
+                sequencesCounter += FindSequences(leftBottomDiagonal);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
-                var topToRightDiagonal = MatrixUtils.GetTopRightDiagonal(dna, iterationNumber);
-                sequencesCounter += FindSequences(topToRightDiagonal);
+                var rightTopDiagonal = MatrixUtils.GetTopRightDiagonal(dna, iterationNumber);
+                sequencesCounter += FindSequences(rightTopDiagonal);
                 if (MoreThanOneSequencesFound(sequencesCounter)) break;
 
                 var leftTopDiagonal = MatrixUtils.GetLeftTopDiagonal(dna, iterationNumber);
