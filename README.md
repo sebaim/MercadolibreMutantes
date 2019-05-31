@@ -54,3 +54,9 @@ git clone https://github.com/sebaim/MercadolibreMutantes.git
 * It was also integrate with Azure DevOps on continuous integration
 ![Azure DevOps Test Summary](DevOpsTests.png)
 
+## Load Test
+* A console was included on project, that allow to create multiple threads to create multiple request
+* When request number is increased, the response time start to be higher than acceptable
+![ResponseTime](CloudResponseTime.png)
+* On this case, on a real scenario we should think about setup a server with more capacity (a non free one)
+![Selected Plan](AzureInfra.png)
