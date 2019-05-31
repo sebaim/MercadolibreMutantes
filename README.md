@@ -43,7 +43,7 @@ https://examenmercadolibremutantes-dev-as.azurewebsites.net/swagger
 ````
 git clone https://github.com/sebaim/MercadolibreMutantes.git
 ````
-* Run "Update-Database" command to create database used to log analysis results
+* Run "Update-Database" command to create database used to log analysis results after change "DefaultConnection" value to local connection string
 * Build and Run Application
 
 ## Unit Test
