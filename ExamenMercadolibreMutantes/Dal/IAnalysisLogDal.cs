@@ -14,7 +14,7 @@ namespace ExamenMercadolibreMutantes.Dal
 
         MutantAnalysisLog GetExistingLog(string[] dna);
 
-        void CreateNewLog(string[] dna, bool isMutant);
+        void CreateNewLog(string[] dna, bool isMutant, DateTime actualDateTime);
 
         void UpdateLog(MutantAnalysisLog mutantAnalysisLog);
     }

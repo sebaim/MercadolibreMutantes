@@ -80,13 +80,14 @@ namespace UnitTests
         public void TestSaveNewLog()
         {
             var mutantDna = new string[] { "ATGCGA", "CTAAAA", "TTCTGT", "ATAATG", "CCCATA", "ACGTAA" };
+            var actualDttm = DateTime.Now;
 
             MutantAnalysisLog notExistingLog = null;
 
             mock.Setup(m => m.GetExistingLog(mutantDna)).Returns(notExistingLog).Verifiable();
-            mock.Setup(m => m.CreateNewLog(mutantDna, true)).Verifiable();
+            mock.Setup(m => m.CreateNewLog(mutantDna, true, actualDttm)).Verifiable();
 
-            analysisLogService.SaveOrUpdateLog(mutantDna, true, DateTime.Now);
+            analysisLogService.SaveOrUpdateLog(mutantDna, true, actualDttm);
 
 
             mock.Verify();

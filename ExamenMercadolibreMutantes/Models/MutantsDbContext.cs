@@ -14,6 +14,10 @@ namespace ExamenMercadolibreMutantes.Models
         {
         }
 
+        public MutantsDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -26,6 +30,6 @@ namespace ExamenMercadolibreMutantes.Models
 
         }
 
-        public DbSet<MutantAnalysisLog> MutantAnalysisLogs { get; set; }
+        public virtual DbSet<MutantAnalysisLog> MutantAnalysisLogs { get; set; }
     }
 }

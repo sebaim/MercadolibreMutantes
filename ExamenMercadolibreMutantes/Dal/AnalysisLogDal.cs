@@ -23,21 +23,20 @@ namespace ExamenMercadolibreMutantes.Dal
             return mutantsDbContext.MutantAnalysisLogs.Where(l => l.IsMutant).Sum(l => l.Count);
         }
 
-        public MutantAnalysisLog GetExistingLog (string[] dna)
+        public MutantAnalysisLog GetExistingLog(string[] dna)
         {
             return mutantsDbContext.MutantAnalysisLogs.Where(log => log.Dna.SequenceEqual(dna)).FirstOrDefault();
         }
 
         public void UpdateLog(MutantAnalysisLog mutantAnalysisLog)
         {
-            mutantsDbContext.Update(mutantAnalysisLog);
+            mutantsDbContext.MutantAnalysisLogs.Update(mutantAnalysisLog);
             mutantsDbContext.SaveChanges();
         }
 
 
-        public void CreateNewLog(string[] dna, bool isMutant)
+        public void CreateNewLog(string[] dna, bool isMutant, DateTime actualDateTime)
         {
-            var actualDateTime = DateTime.Now;
             MutantAnalysisLog newLog = new MutantAnalysisLog()
             {
                 Count = 1,
@@ -47,9 +46,9 @@ namespace ExamenMercadolibreMutantes.Dal
                 IsMutant = isMutant
             };
 
-            mutantsDbContext.Add(newLog);
+            mutantsDbContext.MutantAnalysisLogs.Add(newLog);
 
-            mutantsDbContext.SaveChanges();            
+            mutantsDbContext.SaveChanges();
         }
     }
 }

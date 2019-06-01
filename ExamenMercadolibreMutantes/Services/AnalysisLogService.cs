@@ -37,7 +37,7 @@ namespace ExamenMercadolibreMutantes.Services
             }
             else
             {
-                analysisLogDal.CreateNewLog(dna, isMutant);
+                analysisLogDal.CreateNewLog(dna, isMutant, actualDateTime);
             }
         }
     }
