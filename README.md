@@ -43,14 +43,14 @@ https://examenmercadolibremutantes-dev-as.azurewebsites.net/swagger
 ````
 git clone https://github.com/sebaim/MercadolibreMutantes.git
 ````
-* Run "Update-Database" command to create database used to log analysis results
+* Run "Update-Database" command to create database used to log analysis results after change "DefaultConnection" value to local connection string
 * Build and Run Application
 
 ## Unit Test
 * It was done with Nunit3 Framework and Moq Framework to mock database access
 * Code coverage was calculated with trial version of dotCover (from Resharper)
-* It cover almost 100% of the code logic, and avoid to use database access class (DAL)
-![Code Coverage](CodeCoverage.png)
+* It cover almost 100% of the code logic, mocking database for DAL class
+![Code Coverage](CodeCoverageNew.png)
 * It was also integrate with Azure DevOps on continuous integration
 ![Azure DevOps Test Summary](DevOpsTests.png)
 
