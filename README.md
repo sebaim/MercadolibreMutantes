@@ -50,7 +50,7 @@ git clone https://github.com/sebaim/MercadolibreMutantes.git
 * It was done with Nunit3 Framework and Moq Framework to mock database access
 * Code coverage was calculated with trial version of dotCover (from Resharper)
 * It cover almost 100% of the code logic, and avoid to use database access class (DAL)
-![Code Coverage](CodeCoverage.png)
+![Code Coverage](CodeCoverageNew.png)
 * It was also integrate with Azure DevOps on continuous integration
 ![Azure DevOps Test Summary](DevOpsTests.png)
 
