@@ -48,7 +48,7 @@ git clone https://github.com/sebaim/MercadolibreMutantes.git
 * Build and Run Application
 
 ## Unit Test
-* It was done with Nunit3 Framework and Moq Framework to mock database access
+* It was done with Nunit3 Framework and Moq Framework to mock components
 * Code coverage was calculated with trial version of dotCover (from Resharper)
 * It cover almost 100% of the code logic, mocking database for DAL class
 ![Code Coverage](CodeCoverageNew.png)
