@@ -39,10 +39,11 @@ https://examenmercadolibremutantes-dev-as.azurewebsites.net/swagger
 ````
 
 ## Instructions to compile and test Api
-* Clone repository on visual studio with follow command
+* Clone repository with following command
 ````
 git clone https://github.com/sebaim/MercadolibreMutantes.git
 ````
+* Open .sln file with Visual Studio
 * Run "Update-Database" command to create database used to log analysis results after change "DefaultConnection" value to local connection string
 * Build and Run Application
 
